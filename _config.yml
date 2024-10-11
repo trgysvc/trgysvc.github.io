@@ -1,7 +1,7 @@
 title: ""
 description: ""
 baseurl: ""
-url: ""
+url: "https://trgysvc.github.io/"
 
 exclude:
   - demo/
