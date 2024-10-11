@@ -3,13 +3,13 @@ layout: cv
 title: CV
 ---
 
-# Curriculum Vitæ
+# TURGAY SAVACI
 
 {% include contact.html %}
 
 ## Section
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+A results-oriented department manager with extensive experience in project management, system integration, and infrastructure development in the information technology sector. Proven track record in successfully managing and executing projects related to network systems, automation systems, and data center construction. Comprehensive experience with corporate IT processes and standards, including COBIT, ITIL, and ISO 27001. 
 
 * Ut enim ad minim veniam
 * Quis nostrud exercitation
