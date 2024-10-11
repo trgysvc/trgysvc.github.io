@@ -3,7 +3,7 @@ layout: cv
 title: CV
 ---
 
-# TURGAY SAVACI
+# TURGAY 
 
 {% include contact.html %}
 
