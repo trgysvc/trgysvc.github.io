@@ -5,14 +5,13 @@ title: Home
 
 # About
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+As a results-oriented department manager, I have extensive experience in project management, system integration, and infrastructure development within the information technology sector. I have produced high-quality solutions using programming languages such as Objective C and Swift in the integration of ERP systems and software development processes. I have successfully managed projects related to network systems, automation systems, and data center construction. Additionally, I possess comprehensive experience in enterprise IT processes and standards, including COBIT, ITIL, and ISO 27001. [Click here](cv) to view my full resume and [here](assets/files/cv.pdf) to download the PDF version.
 
-This is the home page. It can be used for a short introduction. [Click here](cv) to see the full CV, and [here](assets/files/cv.pdf) to download a print version. The theme also ships with a blog: [click here](posts) to scroll posts from the most recent. Finally, [click here](404) to see a page that can't be found.
+All these experiences have enabled me to rapidly specialize in software development, design, and game development. Every day, I find great joy in transforming ideas into applications or games.
 
-By default, the theme only contains these few pages in order to stay lean and flexible. However, it can be easily extended to accommodate more pages, [collections](https://jekyllrb.com/docs/collections/), [categories, and tags](https://jekyllrb.com/docs/posts/#tags-and-categories).
+In addition to mobile application development, I have the ability to create impressive 3D animations using Blender. I am also proficient in game development with Unreal Engine; my projects focus on game mechanics and user experience. You can also [click here](posts) to explore my projects and past works. If you are interested in the topics I write about, feel free to [click here](posts) to visit my blog.
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Currently, I am focused on the fields of game and software development for my future projects. I am here to produce creative projects and provide dynamic experiences; in every project, I strive to effectively reflect your unique story and establish a strong connection with your target audience.
 
-Below is a list of blog posts included for illustrative purposes. Make sure to delete or modify them before deploying your website.
 
 {% include archive.html %}
