@@ -6,7 +6,7 @@ The main aesthetic feature of the theme is the use of [particles.js](https://vin
 
 Light and dark modes are available. The theme initializes based on system preferences and stores the user's preference for the duration of the session.
 
-See the [demo](https://piazzai.github.io/cvless) to get a better sense of what the theme looks like.
+See the [demo](https://trgysvc.github.io/) to get a better sense of what the theme looks like.
 
 ![](https://github.com/trgysvc/trgysvc.github.io/blob/3eeef69e613630552012626f88e2e12dbeccbad9/screenshot.png)
 
