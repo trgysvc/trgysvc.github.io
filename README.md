@@ -8,7 +8,7 @@ Light and dark modes are available. The theme initializes based on system prefer
 
 See the [demo](https://piazzai.github.io/cvless) to get a better sense of what the theme looks like.
 
-![](https://github.com/piazzai/cvless/blob/master/screenshot.png)
+![](https://github.com/trgysvc/trgysvc.github.io/blob/3eeef69e613630552012626f88e2e12dbeccbad9/screenshot.png)
 
 ## Installation
 
