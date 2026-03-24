@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link";
-
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -32,10 +31,7 @@ export default function RootLayout({
             {children}
           </main>
 
-          <footer className="text-[11px] text-secondary mt-12 flex justify-between items-center opacity-50">
-            <p>trgysvc</p>
-            <p>© {new Date().getFullYear()}</p>
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>

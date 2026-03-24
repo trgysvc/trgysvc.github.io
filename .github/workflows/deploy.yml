@@ -2,7 +2,7 @@ name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: ["feature/nextjs-migration"]
+    branches: ["master"] # Burayı güncelledik
   workflow_dispatch:
 
 permissions:

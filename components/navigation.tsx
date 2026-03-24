@@ -7,7 +7,7 @@ export function Navigation() {
   const pathname = usePathname();
 
   // Hide navigation on /links
-  if (pathname === "/links") return null;
+  if (pathname === "/links" || pathname === "/links/") return null;
 
   return (
     <header className="flex items-center gap-6 text-sm font-medium mb-12">
