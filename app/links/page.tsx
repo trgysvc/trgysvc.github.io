@@ -16,11 +16,16 @@ import {
   BookOpen,
   Send
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function LinksPage() {
+  const [mounted, setMounted] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const socials = [
     { icon: <Github size={20} />, href: "https://github.com/trgysvc", label: "GitHub" },
@@ -79,6 +84,8 @@ export default function LinksPage() {
       ],
     },
   ];
+
+  if (!mounted) return <div className="min-h-screen bg-black" />;
 
   return (
     <div className="flex flex-col items-center w-full max-w-[500px] mx-auto py-12 animate-fade-in-up">
