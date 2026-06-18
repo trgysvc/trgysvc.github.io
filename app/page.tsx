@@ -23,7 +23,7 @@ export default function Home() {
       description: "operating system for modern real estate ai powered",
     },
     {
-      company: "elite agents",
+      company: "pheronagent",
       role: "co-founder and cto (2026 - )",
       description: "the autonomous ai agent native to apple silicon",
     },

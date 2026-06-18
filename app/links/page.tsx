@@ -46,7 +46,7 @@ export default function LinksPage() {
       links: [
         { label: "ifoundanapple.com", href: "https://ifoundanapple.com" },
         { label: "sonaraura.com", href: "https://sonaraura.com" },
-        { label: "Elite Agents", href: "https://github.com/trgysvc/EliteAgent" },
+        { label: "pheronagent.com", href: "https://www.pheronagent.com" },
       ],
     },
     {
