@@ -34,7 +34,7 @@ export function getBlogPosts(): BlogPost[] {
       title,
       date,
       excerpt,
-      content: fileContent,
+      content: lines.slice(2).join("\n"),
     };
   }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
@@ -56,6 +56,6 @@ export function getBlogPost(slug: string): BlogPost | null {
     title,
     date,
     excerpt: "",
-    content: fileContent,
+    content: lines.slice(2).join("\n"),
   };
 }
