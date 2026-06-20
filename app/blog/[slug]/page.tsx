@@ -2,12 +2,27 @@ import { getBlogPost, getBlogPosts } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
   return posts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+
+  if (!post) {
+    return {};
+  }
+
+  return {
+    title: `${post.title.toLowerCase()} | turgay`,
+    description: post.excerpt.toLowerCase(),
+  };
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
@@ -31,7 +46,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       <article className="flex flex-col gap-8">
         <header className="flex flex-col gap-2">
           <time className="text-[10px] uppercase tracking-widest text-zinc-600 font-mono mb-2">
-            {post.date}
+            turgay — {post.date}
           </time>
           <h1 className="text-2xl font-bold tracking-tight lowercase">
             {post.title}

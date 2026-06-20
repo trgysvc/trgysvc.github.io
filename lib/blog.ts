@@ -50,12 +50,13 @@ export function getBlogPost(slug: string): BlogPost | null {
   const lines = fileContent.split("\n");
   const title = lines[0].replace("# ", "") || "Untitled";
   const date = lines[1] || "";
+  const excerpt = lines.slice(3, 6).join(" ") || "";
 
   return {
     slug,
     title,
     date,
-    excerpt: "",
+    excerpt,
     content: lines.slice(2).join("\n"),
   };
 }

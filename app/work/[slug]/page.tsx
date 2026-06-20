@@ -1,6 +1,7 @@
 import { ScrambleText } from "@/components/scramble-text";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 const SLUG_MAP: Record<string, string> = {
   "ifoundanapple": "ifoundanapple",
@@ -17,6 +18,20 @@ export function generateStaticParams() {
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const title = SLUG_MAP[slug];
+
+  if (!title) {
+    return {};
+  }
+
+  return {
+    title: `${title.toLowerCase()} | turgay`,
+    description: `detailed information for ${title.toLowerCase()}`,
+  };
 }
 
 export default async function WorkDetailPage({ params }: PageProps) {
