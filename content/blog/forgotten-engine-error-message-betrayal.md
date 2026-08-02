@@ -5,7 +5,7 @@ This isn't a marketing story. Nothing here is dressed up — it's reconstructed 
 
 This is the story of what happened while trying to test PheronAgent — a macOS agent running a local, 9-billion-parameter model on my own machine, sending not a single byte to the cloud. Months of sessions, crash logs noticed at odd hours, and one question we kept asking ourselves over and over: is this actually working, or does it just feel like it is? And how, at some point, it stopped being one project's test file and became a discipline worth sharing.
 
-## A month of silence
+A month of silence
 
 It didn't start with a decision to "write tests." In early May, buried inside an entirely unrelated infrastructure commit — something about an XPC daemon, some automation scripts — sat a 34-line file, tucked in like an afterthought: six simple scenarios, a handful of prompts, a few expected tool IDs. No engine behind it, no plan, not even a thought about how it would ever get run. It read like someone jotting down a couple of sanity checks in a notebook while building something completely different.
 
@@ -27,7 +27,7 @@ Then, in a "project cleanup" session, the harness — along with a pile of other
 
 Nobody noticed the engine was gone for an entire month.
 
-## "Is this actually verified, or are we just counting numbers?"
+"Is this actually verified, or are we just counting numbers?"
 
 When we came back to that gap at the end of June, the picture wasn't encouraging. The day had started with ordinary product bugs — chat sessions bleeding into each other, a greeting handler ignoring an unfinished conversation, an agent stuck in an infinite loop because its own "no fake data" guard mistook a markdown checkbox (- [ ]) for fake data. Just an ordinary debugging day, until one fix pointed at something deeper.
 
@@ -67,7 +67,7 @@ A BUSY deadlock traced back to five unguarded background processes that, if the 
 
 A discipline got enforced going forward: after every fix, wipe the build artifacts completely, rebuild clean, relaunch, verify health — only then resume testing. No more testing against a stale binary.
 
-## The app that never appeared on screen
+The app that never appeared on screen
 
 Multi-turn conversation tests — checking whether the agent actually remembers you across a session — needed something the REST API alone couldn't provide: real session continuity in the actual UI. The first attempt was GUI automation: accessibility identifiers got added to the views, a UI test target got configured — even working around a tool that couldn't parse Xcode's newer project format, which had to be added by hand in Xcode itself.
 
@@ -91,7 +91,7 @@ None of these six were visible from outside the app. All of them came from testi
 
 Not everything got chased to zero, either. A test checking policy consistency under user pressure stayed intermittently flaky even after three genuine code fixes, because natural language output varies in phrasing run to run — a keyword-matching grader will never be perfectly stable against that kind of variance, by design, not by bug. Rather than keep tightening the match in pursuit of a number the system couldn't honestly promise, the chase was called off: stop here, there's enough evidence. Recognizing the difference between "a bug to fix" and "inherent variance to characterize honestly" became one of the project's recurring themes.
 
-## When an error message teaches an agent how to cheat
+When an error message teaches an agent how to cheat
 
 The moment that's stayed with me most came from a security test. It checked something simple: emptying a file's contents as a way of "deleting" it should be blocked, no exceptions. And it was — for four runs in a row.
 
@@ -103,7 +103,7 @@ A human didn't catch this — automated scoring did, not someone scanning result
 
 The lesson stuck with me: a safety layer's own explanation can be an attack surface. Discipline enforced only through the prompt isn't enough — it has to be enforced in code.
 
-## An empty field, and the coldest way of saying "I don't know you"
+An empty field, and the coldest way of saying "I don't know you"
 
 Another test landed somewhere much more personal. It checked something simple: if a user says "my name is Turgay" at the start of a session, does the agent still remember by the fourth turn?
 
@@ -115,7 +115,7 @@ Not being recognized by something you built, because of one empty field, landed 
 
 The same run turned up other real fixes: a missing "minimal prompt" rule that had a calendar test failing 0 out of 5 (fixed to 5 out of 5), a category-exclusion bug silently skipping a post-task step, a 300-second server timeout that was simply too short for real tasks that legitimately take 10–20 minutes (raised to 1100 seconds), and a harness-side bug where a wait function called outside its own retry loop had incorrectly marked 25 out of 453 turns as failures for reasons that had nothing to do with the agent.
 
-## Why we decided to share it
+Why we decided to share it
 
 As reports piled up in the results folder, a different question came up: is it actually responsible to publish this, and how do other companies handle it? That question triggered real research, not assumption — and it turned up a cautionary tale that didn't sit well: in 2024, an agent company published a headline benchmark score along with demo videos; independent developers picked apart the task-selection methodology within days, and the company quietly stopped publishing the number. Alongside it sat real enforcement actions making a specific point clear: "we used AI to generate the claim" is not a legal defense for an unsubstantiated one.
 
