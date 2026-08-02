@@ -7,7 +7,8 @@ const SLUG_MAP: Record<string, string> = {
   "ifoundanapple": "ifoundanapple",
   "sonaraura": "sonaraura",
   "investrong-crm": "investrong crm",
-  "elite-agents": "elite agents",
+  "pheronagent": "pheronagent",
+  "elite-agents": "pheronagent",
 };
 
 export function generateStaticParams() {

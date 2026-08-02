@@ -22,10 +22,10 @@ export default function Work() {
       slug: "investrong-crm",
     },
     {
-      company: "elite agents",
+      company: "pheronagent",
       role: "co-founder and cto (2026 - )",
       description: "the autonomous ai agent native to apple silicon",
-      slug: "elite-agents",
+      slug: "pheronagent",
     },
   ];
 

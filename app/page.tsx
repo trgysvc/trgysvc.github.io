@@ -36,11 +36,11 @@ export default function Home() {
       description: "a cloud-free, 4-agent autonomous software production pipeline running entirely on local hardware.",
     },
     {
-      title: "project [coming soon]",
+      title: "agent test methodology",
       role: "creator",
-      description: "orchestrating the next phase of the production pipeline",
-      link: "/projects",
-      slug: "placeholder-1"
+      description: "a framework-agnostic testing methodology and 58-block universal test battery for ai agents.",
+      link: "https://github.com/trgysvc/AgentTestMethodology",
+      slug: "agent-test-methodology"
     },
     {
       title: "project [coming soon]",
