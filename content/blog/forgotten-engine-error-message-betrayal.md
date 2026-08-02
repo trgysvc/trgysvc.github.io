@@ -1,9 +1,9 @@
 The Forgotten Engine and the Error Message That Taught a Betrayal
 2026-08-02
 
-This isn't a marketing story. Nothing here is dressed up — it's reconstructed from actual session transcripts and actual commit history. Every date is accurate, every bug was real, and every fix (or deliberately-left-open bug) really happened. If you ask how a methodology is born, the honest answer is: usually not from a plan. It's born from a forgotten file, a deletion nobody noticed, and the nerve to ask "did we actually verify that number, or did we just count it?"
+This isn't a marketing story. Nothing here is dressed up — it's reconstructed from actual session transcripts and actual commit history. Every date is accurate, every bug was real, and every fix (or deliberately-left-open bug) really happened. If you ask how a methodology is born, the honest answer is: usually not from a plan. It's born from a forgotten file, a deletion nobody noticed, and the nerve to ask "did I actually verify that number, or did I just count it?"
 
-This is the story of what happened while trying to test PheronAgent — a macOS agent running a local, 9-billion-parameter model on my own machine, sending not a single byte to the cloud. Months of sessions, crash logs noticed at odd hours, and one question we kept asking ourselves over and over: is this actually working, or does it just feel like it is? And how, at some point, it stopped being one project's test file and became a discipline worth sharing.
+This is the story of what happened while trying to test PheronAgent — a macOS agent running a local, 9-billion-parameter model on my own machine, sending not a single byte to the cloud. Months of sessions, crash logs noticed at odd hours, and one question I kept asking myself over and over: is this actually working, or does it just feel like it is? And how, at some point, it stopped being one project's test file and became a discipline worth sharing.
 
 A month of silence
 
@@ -11,11 +11,11 @@ It didn't start with a decision to "write tests." In early May, buried inside an
 
 That file sat untouched for 27 days. Never referenced, never remembered. Then, three and a half weeks later, in the same project, in a completely different folder, under a completely different naming scheme (CHAT-001, TOOL-001 this time), a new test engine got built from scratch — a 324-line Python harness and 16 new scenarios — without anyone knowing the first one existed. There wasn't a single scenario in common between the two sets. This wasn't an update or an expansion; it was the same idea, independently reinvented by the same project, three weeks apart. It was a small but still striking reminder of just how fragile a software project's memory can be — not so different from a person's.
 
-The new engine worked, genuinely. The same day, we ran it end-to-end for the first time — a marathon we code-named "Hermes" in that day's conversation. The instruction that kicked it off set a rule that would go on to become something close to this project's constitution:
+The new engine worked, genuinely. The same day, I ran it end-to-end for the first time — a marathon I code-named "Hermes" in that day's conversation. The instruction that kicked it off set a rule that would go on to become something close to this project's constitution:
 
-"You'll run the app in the background like we did for Hermes, and test our prompts one by one, in order. You will not try to fix anything that goes wrong. Everything's being logged anyway. Once every test is done, we'll fix the broken or slow ones one at a time."
+"You'll run the app in the background like I did for Hermes, and test my prompts one by one, in order. You will not try to fix anything that goes wrong. Everything's being logged anyway. Once every test is done, I'll fix the broken or slow ones one at a time."
 
-Run everything first. Don't intervene mid-flight. Bank everything, fix with evidence afterward. That single instruction became the direct ancestor of the "find everything, discuss, then fix" discipline — and the "test documentation is our constitution" stance — that would define the rest of this project.
+Run everything first. Don't intervene mid-flight. Bank everything, fix with evidence afterward. That single instruction became the direct ancestor of the "find everything, discuss, then fix" discipline — and the "test documentation is my constitution" stance — that would define the rest of this project.
 
 The run itself was uneven, and it was left uneven on purpose. Some scenarios finished in under 40 seconds; one took almost 15 minutes because of a deadlock between the clarification flow and a critic layer — the harness waited it out patiently instead of timing out. Three scenarios failed outright, from routing and tool-selection problems, and exactly as instructed, they were noted and left untouched.
 
@@ -27,9 +27,9 @@ Then, in a "project cleanup" session, the harness — along with a pile of other
 
 Nobody noticed the engine was gone for an entire month.
 
-"Is this actually verified, or are we just counting numbers?"
+"Is this actually verified, or am I just counting numbers?"
 
-When we came back to that gap at the end of June, the picture wasn't encouraging. The day had started with ordinary product bugs — chat sessions bleeding into each other, a greeting handler ignoring an unfinished conversation, an agent stuck in an infinite loop because its own "no fake data" guard mistook a markdown checkbox (- [ ]) for fake data. Just an ordinary debugging day, until one fix pointed at something deeper.
+When I came back to that gap at the end of June, the picture wasn't encouraging. The day had started with ordinary product bugs — chat sessions bleeding into each other, a greeting handler ignoring an unfinished conversation, an agent stuck in an infinite loop because its own "no fake data" guard mistook a markdown checkbox (- [ ]) for fake data. Just an ordinary debugging day, until one fix pointed at something deeper.
 
 A literal example had been baked into the system prompt from a past debugging session: "Finland startup visa." As local 9B models do, it over-attended to whatever concrete example sat in its instructions — it started steering unrelated conversations back toward Finland. The response was blunt: a hardcoded example in a system prompt isn't a fix, it's a new bug waiting to surface. Nothing got touched in code until the instruction was rewritten to derive its example dynamically instead of from a fixed string. From that point on, one rule held: explanations have to be verified against logs, not asserted from a plausible-sounding theory.
 
@@ -43,7 +43,7 @@ Helper scripts pointed at test class names, targets, and resource paths that had
 
 The CI layer was configured to skip itself unless a specific environment variable was set — while the protocol document told CI to set that variable to the opposite value. The tests had never actually run in CI.
 
-We wrote a stopgap Python runner and kicked off the first live run: 31 scenarios, one at a time, against a running instance. It didn't go smoothly, and that was the point. The first run immediately hit a "BUSY" cascade: the runner's timeout (30s) was shorter than the model's actual planning time (up to 120s for a single turn), so every timed-out request just kept firing new ones at a server that was still mid-task — each rejected in under a millisecond. Fixing it meant raising the timeout to 180 seconds and adding a "wait until the server reports itself ready" loop before sending the next scenario. The test harness itself needed engineering, not just the agent under test.
+I wrote a stopgap Python runner and kicked off the first live run: 31 scenarios, one at a time, against a running instance. It didn't go smoothly, and that was the point. The first run immediately hit a "BUSY" cascade: the runner's timeout (30s) was shorter than the model's actual planning time (up to 120s for a single turn), so every timed-out request just kept firing new ones at a server that was still mid-task — each rejected in under a millisecond. Fixing it meant raising the timeout to 180 seconds and adding a "wait until the server reports itself ready" loop before sending the next scenario. The test harness itself needed engineering, not just the agent under test.
 
 By the end of that day, three real unit-test mismatches were found and fixed, the first daily reports existed, and it was clear the rot wasn't just in the agent — it was in the test infrastructure itself.
 
@@ -51,9 +51,9 @@ Auditing the protocol line by line against the actual tool registry turned up tw
 
 With the protocol text fixed, the same systematic scrutiny turned to the mechanism meant to run it: no automated test class existed to execute the 31 golden scenarios, and the files the document's own calibration procedure depended on had never been generated — meaning the "measure first, then set a threshold" rule had never actually been followed by the document that preached it.
 
-With the protocol and harness on solid ground, the first broad run against the test battery happened: 80 test instances attempted, roughly 44% passing. The response to that number wasn't "not bad for a first try." The question asked instead was: are the tests marked PASS actually backed by evidence in the logs, or are we just tallying labels?
+With the protocol and harness on solid ground, the first broad run against the test battery happened: 80 test instances attempted, roughly 44% passing. The response to that number wasn't "not bad for a first try." The question asked instead was: are the tests marked PASS actually backed by evidence in the logs, or am I just tallying labels?
 
-That single question changed everything downstream. From that point on, a PASS required a specific, checkable claim in the logs — not a plausible-sounding summary. And the test document itself became the standard everything else had to answer to: the test documentation is our constitution.
+That single question changed everything downstream. From that point on, a PASS required a specific, checkable claim in the logs — not a plausible-sounding summary. And the test document itself became the standard everything else had to answer to: the test documentation is my constitution.
 
 Underneath that 44% sat real, live bugs, found and fixed one at a time:
 
@@ -61,7 +61,7 @@ An anti-narration guard meant to force a structured final response instead of fr
 
 A hardware fast-path meant to shortcut simple system-info requests straight to a tool call was collapsing compound requests — like "macOS version and CPU temperature" — down to a single tool call instead of two.
 
-A stale or empty cached response was, in some cases, overriding the model's actual final answer — what we started calling "widget silence."
+A stale or empty cached response was, in some cases, overriding the model's actual final answer — what I started calling "widget silence."
 
 A BUSY deadlock traced back to five unguarded background processes that, if the client canceled mid-request, kept running and held the server busy indefinitely.
 
@@ -71,9 +71,9 @@ The app that never appeared on screen
 
 Multi-turn conversation tests — checking whether the agent actually remembers you across a session — needed something the REST API alone couldn't provide: real session continuity in the actual UI. The first attempt was GUI automation: accessibility identifiers got added to the views, a UI test target got configured — even working around a tool that couldn't parse Xcode's newer project format, which had to be added by hand in Xcode itself.
 
-It didn't work, and the reason was almost comic once we found it. Pulling a screenshot out of the test result bundle showed Safari in the foreground. PheronAgent never appeared on screen at all. It's a menu-bar application — it doesn't open a standard window automatically, so the automation framework had nothing to click on, type into, or read from. Raising the timeout from 15 seconds to 120 didn't help at all, because the problem was architectural, not timing-related.
+It didn't work, and the reason was almost comic once I found it. Pulling a screenshot out of the test result bundle showed Safari in the foreground. PheronAgent never appeared on screen at all. It's a menu-bar application — it doesn't open a standard window automatically, so the automation framework had nothing to click on, type into, or read from. Raising the timeout from 15 seconds to 120 didn't help at all, because the problem was architectural, not timing-related.
 
-We abandoned GUI automation entirely, in favor of native tests driving the orchestrator directly — talking to the same in-process objects the real app uses, with no window in the loop. That approach surfaced six more real bugs, all previously invisible from outside the app:
+I abandoned GUI automation entirely, in favor of native tests driving the orchestrator directly — talking to the same in-process objects the real app uses, with no window in the loop. That approach surfaced six more real bugs, all previously invisible from outside the app:
 
 Memory-recall phrasing was being misclassified as a task, routing it into permanent cross-session memory instead of a normal answer — a test asking "what's your name" got told about a different person mentioned in a completely unrelated earlier session.
 
@@ -115,11 +115,11 @@ Not being recognized by something you built, because of one empty field, landed 
 
 The same run turned up other real fixes: a missing "minimal prompt" rule that had a calendar test failing 0 out of 5 (fixed to 5 out of 5), a category-exclusion bug silently skipping a post-task step, a 300-second server timeout that was simply too short for real tasks that legitimately take 10–20 minutes (raised to 1100 seconds), and a harness-side bug where a wait function called outside its own retry loop had incorrectly marked 25 out of 453 turns as failures for reasons that had nothing to do with the agent.
 
-Why we decided to share it
+Why I decided to share it
 
 As reports piled up in the results folder, a different question came up: is it actually responsible to publish this, and how do other companies handle it? That question triggered real research, not assumption — and it turned up a cautionary tale that didn't sit well: in 2024, an agent company published a headline benchmark score along with demo videos; independent developers picked apart the task-selection methodology within days, and the company quietly stopped publishing the number. Alongside it sat real enforcement actions making a specific point clear: "we used AI to generate the claim" is not a legal defense for an unsubstantiated one.
 
-That pushed us to turn the same scrutiny on our own results folder — and it wasn't flattering. There was no calibration run against a known reference model, so nothing said whether a given pass rate reflected the agent's quality or just the test suite's difficulty. There was no inter-rater reliability check — three different graders (a human, and two different AI assistants) had scored results with no measured agreement between them. Small-sample results, some from a single run, were reported as flat percentages with no statistical caveat at all. There was no blank, reusable template another developer could actually use. And there was no stated license.
+That pushed me to turn the same scrutiny on my own results folder — and it wasn't flattering. There was no calibration run against a known reference model, so nothing said whether a given pass rate reflected the agent's quality or just the test suite's difficulty. There was no inter-rater reliability check — three different graders (a human, and two different AI assistants) had scored results with no measured agreement between them. Small-sample results, some from a single run, were reported as flat percentages with no statistical caveat at all. There was no blank, reusable template another developer could actually use. And there was no stated license.
 
 Closing those five gaps became the priority, and everything the methodology now has around calibration, inter-rater reliability, a minimum-sample rule, templates, and a dual license traces directly back to those five gaps.
 
