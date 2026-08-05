@@ -141,4 +141,96 @@
     margin-right: auto !important;
     width: 100% !important;
   }
+
+  /* Kit (ConvertKit) Form Theme Alignment */
+  .formkit-form,
+  form.seva-form,
+  [data-uid="023bef0354"] {
+    background-color: #000000 !important;
+    border: 1px solid #18181b !important;
+    border-radius: 0.5rem !important;
+    padding: 1.5rem !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    font-family: ui-monospace, 'Geist Mono', monospace !important;
+    color: #a1a1aa !important;
+  }
+
+  .formkit-form *,
+  form.seva-form * {
+    font-family: ui-monospace, 'Geist Mono', monospace !important;
+    white-space: normal !important;
+  }
+
+  .formkit-form .formkit-header,
+  form.seva-form .formkit-header,
+  .formkit-form [data-element="header"] {
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    text-transform: lowercase !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .formkit-form .formkit-subheader,
+  form.seva-form .formkit-subheader,
+  .formkit-form [data-element="subheader"],
+  .formkit-form p,
+  form.seva-form p {
+    color: #a1a1aa !important;
+    font-size: 0.875rem !important;
+  }
+
+  .formkit-form .formkit-input,
+  form.seva-form .formkit-input,
+  .formkit-form input[type="email"],
+  .formkit-form input[type="text"] {
+    background-color: #09090b !important;
+    color: #ffffff !important;
+    border: 1px solid #27272a !important;
+    border-radius: 0.375rem !important;
+    padding: 0.625rem 0.875rem !important;
+    font-size: 0.875rem !important;
+    font-family: ui-monospace, 'Geist Mono', monospace !important;
+    outline: none !important;
+  }
+
+  .formkit-form .formkit-input:focus,
+  form.seva-form .formkit-input:focus {
+    border-color: var(--accent) !important;
+  }
+
+  .formkit-form .formkit-submit,
+  form.seva-form .formkit-submit,
+  .formkit-form button[type="submit"],
+  .formkit-form button.formkit-submit {
+    background-color: var(--accent) !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: 0.375rem !important;
+    padding: 0.625rem 1.25rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 700 !important;
+    font-family: ui-monospace, 'Geist Mono', monospace !important;
+    cursor: pointer !important;
+    transition: opacity 0.2s ease !important;
+    text-transform: lowercase !important;
+  }
+
+  .formkit-form .formkit-submit:hover,
+  form.seva-form .formkit-submit:hover {
+    opacity: 0.9 !important;
+  }
+
+  .formkit-form .formkit-guarantee,
+  .formkit-form .formkit-powered-by,
+  .formkit-powered-by-convertkit {
+    color: #52525b !important;
+    font-size: 0.75rem !important;
+  }
+
+  .formkit-form .formkit-background {
+    display: none !important;
+  }
 }
