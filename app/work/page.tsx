@@ -4,6 +4,12 @@ import Link from "next/link";
 export default function Work() {
   const experiences = [
     {
+      company: "pheronagent",
+      role: "co-founder and cto (2026 - )",
+      description: "the autonomous ai agent native to apple silicon",
+      slug: "pheronagent",
+    },
+    {
       company: "ifoundanapple",
       role: "co-founder and cto (2025 - )",
       description: "we connect you anonymously with the person who found your device.",
@@ -20,12 +26,6 @@ export default function Work() {
       role: "co-founder and cto (2025 - )",
       description: "operating system for modern real estate ai powered",
       slug: "investrong-crm",
-    },
-    {
-      company: "pheronagent",
-      role: "co-founder and cto (2026 - )",
-      description: "the autonomous ai agent native to apple silicon",
-      slug: "pheronagent",
     },
   ];
 

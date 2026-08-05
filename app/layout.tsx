@@ -11,8 +11,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Turgay | software developer",
-  description: "portfolio of Turgay - software and game developer",
+  title: "Turgay Savacı — Privacy-First Autonomous AI Agents",
+  description: "Building privacy-first autonomous AI agents that run entirely on Apple Silicon. Creator of PheronAgent.",
 };
 
 export default function RootLayout({

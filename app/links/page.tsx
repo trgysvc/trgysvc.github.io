@@ -121,7 +121,7 @@ export default function LinksPage() {
           <BadgeCheck size={18} className="text-yellow-500 fill-yellow-500/20" />
         </div>
         <p className="text-zinc-500 text-sm lowercase max-w-[400px] leading-relaxed">
-          Hi 👋 i'm Turgay, software and game developer. it manager turned indie maker — building apps, games and 3d experiences. crafting cloud-native systems, real-time game mechanics and 3d asset pipelines. currently building anf: an autonomous software production pipeline running on local hardware.
+          i'm Turgay — building privacy-first autonomous AI agents on Apple Silicon. no cloud, no data leaving your machine. creator of PheronAgent.
         </p>
       </div>
 

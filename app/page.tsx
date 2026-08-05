@@ -8,6 +8,11 @@ export default function Home() {
 
   const work = [
     {
+      company: "pheronagent",
+      role: "co-founder and cto (2026 - )",
+      description: "the autonomous ai agent native to apple silicon",
+    },
+    {
       company: "ifoundanapple",
       role: "co-founder and cto (2025 - )",
       description: "connecting you anonymously with the person who found your device.",
@@ -21,11 +26,6 @@ export default function Home() {
       company: "investrong crm",
       role: "co-founder and cto (2025 - )",
       description: "operating system for modern real estate ai powered",
-    },
-    {
-      company: "pheronagent",
-      role: "co-founder and cto (2026 - )",
-      description: "the autonomous ai agent native to apple silicon",
     },
   ];
 
@@ -67,9 +67,7 @@ export default function Home() {
           </p>
         </div>
         <p className="text-zinc-400 text-sm leading-relaxed max-w-xl mt-4">
-          i'm Turgay, software and game developer. it manager turned indie maker — building apps, games and 3d experiences.
-          crafting cloud-native systems, real-time game mechanics and 3d asset pipelines.
-          currently building anf: an autonomous software production pipeline running on local hardware.{" "}
+          i'm Turgay — I build privacy-first autonomous AI agents that run entirely on Apple Silicon. No cloud, no data leaving your machine. After 20+ years architecting enterprise infrastructure and data centers, I now build the kind of local-first, sovereign software I always wanted to use. Currently: PheronAgent, an autonomous AI agent native to your Mac.{" "}
           <Link href="/about" className="accent hover:underline inline-flex items-center gap-1 group">
             all about <span className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">↗</span>
           </Link>
