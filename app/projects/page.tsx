@@ -29,6 +29,19 @@ export default function Projects() {
       link: "https://github.com/trgysvc/AgentTestMethodology",
     },
     {
+      title: "audiointelligence",
+      role: "creator",
+      period: "2026 - present",
+      description: "a production-ready audio intelligence library powered natively by apple silicon (metal/ane) within the wift ecosystem.",
+      achievements: [
+        "on-device audio processing with zero external cloud dependencies",
+        "hardware-accelerated inference utilizing metal and apple neural engine (ane)",
+        "seamless integration into wift ecosystem audio workflows",
+      ],
+      technologies: ["swift", "apple silicon", "metal", "ane", "audio processing"],
+      link: "https://github.com/trgysvc/audiointelligence",
+    },
+    {
       title: "project [coming soon]",
       role: "creator",
       period: "2026",

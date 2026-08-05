@@ -43,6 +43,13 @@ export default function Home() {
       slug: "agent-test-methodology"
     },
     {
+      title: "audiointelligence",
+      role: "creator",
+      description: "a production-ready audio intelligence library powered natively by apple silicon (metal/ane).",
+      link: "https://github.com/trgysvc/audiointelligence",
+      slug: "audiointelligence"
+    },
+    {
       title: "project [coming soon]",
       role: "creator",
       description: "building the future of autonomous systems",
