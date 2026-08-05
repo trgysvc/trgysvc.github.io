@@ -142,95 +142,131 @@
     width: 100% !important;
   }
 
-  /* Kit (ConvertKit) Form Theme Alignment */
-  .formkit-form,
-  form.seva-form,
-  [data-uid="023bef0354"] {
-    background-color: #000000 !important;
-    border: 1px solid #18181b !important;
-    border-radius: 0.5rem !important;
-    padding: 1.5rem !important;
+  /* Kit (ConvertKit) Form Theme Alignment - Minimal Inline Style */
+  html body .formkit-form,
+  html body form.seva-form,
+  html body [data-uid="023bef0354"] {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
     max-width: 100% !important;
     box-shadow: none !important;
     font-family: ui-monospace, 'Geist Mono', monospace !important;
     color: #a1a1aa !important;
   }
 
-  .formkit-form *,
-  form.seva-form * {
+  html body .formkit-form *,
+  html body form.seva-form * {
     font-family: ui-monospace, 'Geist Mono', monospace !important;
     white-space: normal !important;
   }
 
-  .formkit-form .formkit-header,
-  form.seva-form .formkit-header,
-  .formkit-form [data-element="header"] {
-    color: #ffffff !important;
-    font-size: 1rem !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.025em !important;
-    text-transform: lowercase !important;
-    margin-bottom: 0.5rem !important;
+  html body .formkit-form[data-uid="023bef0354"] [data-style="clean"] {
+    padding: 0 !important;
+    width: 100% !important;
   }
 
-  .formkit-form .formkit-subheader,
-  form.seva-form .formkit-subheader,
-  .formkit-form [data-element="subheader"],
-  .formkit-form p,
-  form.seva-form p {
-    color: #a1a1aa !important;
-    font-size: 0.875rem !important;
+  html body .formkit-form .formkit-fields,
+  html body form.seva-form .seva-fields,
+  html body .formkit-form [data-element="fields"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
   }
 
-  .formkit-form .formkit-input,
-  form.seva-form .formkit-input,
-  .formkit-form input[type="email"],
-  .formkit-form input[type="text"] {
-    background-color: #09090b !important;
+  html body .formkit-form .formkit-field,
+  html body form.seva-form .formkit-field {
+    flex: 1 1 auto !important;
+    margin: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  html body .formkit-form .formkit-header,
+  html body form.seva-form .formkit-header,
+  html body .formkit-form [data-element="header"],
+  html body .formkit-form .formkit-subheader,
+  html body form.seva-form .formkit-subheader,
+  html body .formkit-form [data-element="subheader"],
+  html body .formkit-form p,
+  html body form.seva-form p {
+    display: none !important;
+  }
+
+  html body .formkit-form .formkit-input,
+  html body form.seva-form .formkit-input,
+  html body .formkit-form input[type="email"],
+  html body .formkit-form input[type="text"] {
+    background-color: #0a0a0c !important;
     color: #ffffff !important;
     border: 1px solid #27272a !important;
     border-radius: 0.375rem !important;
-    padding: 0.625rem 0.875rem !important;
-    font-size: 0.875rem !important;
+    padding: 0 0.75rem !important;
+    font-size: 0.75rem !important;
     font-family: ui-monospace, 'Geist Mono', monospace !important;
     outline: none !important;
+    width: 100% !important;
+    height: 36px !important;
+    line-height: 36px !important;
   }
 
-  .formkit-form .formkit-input:focus,
-  form.seva-form .formkit-input:focus {
+  html body .formkit-form .formkit-input:focus,
+  html body form.seva-form .formkit-input:focus {
     border-color: var(--accent) !important;
   }
 
-  .formkit-form .formkit-submit,
-  form.seva-form .formkit-submit,
-  .formkit-form button[type="submit"],
-  .formkit-form button.formkit-submit {
+  html body .formkit-form .formkit-submit,
+  html body form.seva-form .formkit-submit,
+  html body .formkit-form button[type="submit"],
+  html body .formkit-form button.formkit-submit {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
     background-color: var(--accent) !important;
     color: #000000 !important;
     border: none !important;
     border-radius: 0.375rem !important;
-    padding: 0.625rem 1.25rem !important;
-    font-size: 0.875rem !important;
-    font-weight: 700 !important;
-    font-family: ui-monospace, 'Geist Mono', monospace !important;
+    padding: 0 !important;
+    height: 36px !important;
     cursor: pointer !important;
     transition: opacity 0.2s ease !important;
-    text-transform: lowercase !important;
+    outline: none !important;
   }
 
-  .formkit-form .formkit-submit:hover,
-  form.seva-form .formkit-submit:hover {
+  html body .formkit-form .formkit-submit > span,
+  html body form.seva-form .formkit-submit > span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 1.25rem !important;
+    height: 100% !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    font-family: ui-monospace, 'Geist Mono', monospace !important;
+    text-transform: lowercase !important;
+    color: #000000 !important;
+    background-color: transparent !important;
+  }
+
+  html body .formkit-form .formkit-submit:hover,
+  html body form.seva-form .formkit-submit:hover {
     opacity: 0.9 !important;
   }
 
-  .formkit-form .formkit-guarantee,
-  .formkit-form .formkit-powered-by,
-  .formkit-powered-by-convertkit {
-    color: #52525b !important;
-    font-size: 0.75rem !important;
+  html body .formkit-form .formkit-guarantee,
+  html body .formkit-form .formkit-powered-by,
+  html body .formkit-powered-by-convertkit-container,
+  html body .formkit-powered-by-convertkit,
+  html body .formkit-form [data-element="guarantee"] {
+    display: none !important;
   }
 
-  .formkit-form .formkit-background {
+  html body .formkit-form .formkit-background {
     display: none !important;
   }
 }

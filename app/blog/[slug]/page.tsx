@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import type { Metadata } from "next";
-import Script from "next/script";
+import { KitNewsletter } from "@/components/kit-newsletter";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts();
@@ -62,18 +62,13 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       </article>
 
       <footer className="mt-12 pt-8 border-t border-white/5 flex flex-col gap-4">
-        <Script 
-          async 
-          data-uid="023bef0354" 
-          src="https://trgysvc.kit.com/023bef0354/index.js"
-          strategy="afterInteractive"
-        />
         <Link 
           href="/blog" 
           className="text-[10px] text-zinc-600 hover:text-white transition-colors font-mono"
         >
           [end of entry]
         </Link>
+        <KitNewsletter />
       </footer>
     </div>
   );
