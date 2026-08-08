@@ -11,8 +11,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://trgysvc.github.io"),
   title: "Turgay Savacı — Privacy-First Autonomous AI Agents",
   description: "Building privacy-first autonomous AI agents that run entirely on Apple Silicon. Creator of PheronAgent.",
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
