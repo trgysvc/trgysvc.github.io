@@ -1,0 +1,46 @@
+The Agent Said It Failed. The Jira Ticket Said Otherwise.
+2026-08-18
+
+I asked it to move a ticket to "In Progress." It came back with an error: too many steps, task aborted. I believed it — why wouldn't I, it had just spent eleven visible turns wrestling with an API in front of me. I was already composing the follow-up prompt, the "okay, let's try that again, this time do X" kind of message you write when a tool has just told you it gave up.
+
+Then, mostly out of habit rather than suspicion, I opened Jira myself before sending it.
+
+The ticket was already sitting in "In Progress."
+
+That one sentence is the whole subject of this post, so I want to slow down and actually walk through how a piece of software ends up reporting failure on a task it had, moments earlier, actually completed — because the answer isn't "it lied." It's stranger and, I think, more instructive than that.
+
+Why I was even in Jira at one in the morning
+
+For the last few nights I've been doing the least glamorous kind of engineering work there is: taking integrations that were built, marked done, and never actually pointed at a real account, and pointing them at real accounts. Jira, Linear, Slack, Figma, Sentry, Postgres — six of them, all wired up in a previous session, all carrying the same honest little label in the code: NOT YET LIVE-TESTED. That label is a promise you haven't kept yet. The only way to keep it is to connect to the real service, with real credentials, and ask it to do something a real user would ask for, and then watch, specifically, for the gap between "the code compiles and the happy path works once" and "this survives contact with an actual API on an actual bad day."
+
+Jira's actual bad day started before I even got to write a single tool call. Atlassian, it turns out, now issues two different kinds of API tokens — a classic one and a newer "scoped" one — and the integration protocol I was connecting through only accepts the scoped kind, silently. Then the account I was testing with didn't have Jira provisioned on it at all, just Bitbucket and Trello, so I had to create a whole site from nothing. Then, once the site existed and the token was the right kind, a permissions toggle buried in the organization's admin panel — off by default — blocked API-token auth entirely, with an error message that blamed neither the token nor the toggle directly, just a vague "ask your admin." Three separate, real obstacles, each with its own investigation, before I'd moved a single ticket. By the time I actually got to test the thing I'd come to test — can the agent read an issue, see what statuses it can move to, and move it — I was already fairly deep into the night.
+
+Which is exactly the state I was in when I asked it to take KAN-1 from "To Do" to "In Progress," and it told me it couldn't.
+
+What the logs actually said happened
+
+I don't take a failure message at face value anymore — not because I assume the agent is lying, but because I've learned that "it failed" and "the underlying action failed" are two different claims that happen to produce the same sentence. So I went and read the three logs the agent keeps of its own operation: the audit trail of every tool call and its raw response, the debug log underneath that, and the conversation log showing what the model actually reasoned at each step. Not prose explanations after the fact — the actual timestamped record.
+
+Here's the sequence it showed. The agent first read the issue, then asked Jira what transitions were available from its current status — both of those calls were clean, real, successful reads, exactly the kind of careful, look-before-you-leap behavior you'd want. Then it tried to fire the actual transition, and got that wrong on the first attempt: it passed the transition's ID as a number, where the API wanted it as a string. A small, forgivable mistake — the kind of type error a person makes too when they're working against a schema they've only seen in an error message. It corrected itself, sent the ID as a string on the next call, and that one went through. Twenty-one characters came back — short, terse, exactly the shape of a real Jira success response, not an error body. The ticket moved. The task I'd asked for was, at that exact moment, done.
+
+And it still got reported to me as a failure, because of a safety mechanism that has nothing to do with Jira at all.
+
+Agents that call tools in a loop need a limit on how many turns they're allowed to take before something has clearly gone wrong — otherwise a confused model can spin forever, burning time and API calls on a task that was never going anywhere. But a hard, unforgiving limit has its own failure mode: it can cut off a task that's making real, visible progress, one step before it lands, just because the count ran out. So there's a grace mechanism — extra room granted specifically when the agent has just done something that actually succeeded, on the theory that real progress deserves a little more patience than a blank string of failures does. The version of that mechanism running that night was one-shot. It had already triggered once, earlier, on the two clean read calls — which is not wrong, those genuinely were successes — but it meant there was nothing left in reserve by the time the actual write, the thing I cared about, succeeded one step later. The turn counter ran out a beat after the ticket had already moved. The agent didn't know it had won. It just knew it was out of turns, and said so, honestly, in the only language it had for that situation: too many steps, task failed.
+
+So I got a clean, confident, entirely sincere failure message describing a task that had already succeeded.
+
+The fix, and not taking the fix's word for it either
+
+The change itself is almost anticlimactic to describe: the one-shot grace became a small budget instead — it can fire a second time, but only if something genuinely new succeeded after the first grant was already spent. Not a longer timer, not a more lenient model, nothing that papers over the actual signal. Just: don't call the whole task a loss while a real win from three seconds ago is still sitting, unread, in a server response.
+
+I didn't trust that description of the fix any more than I'd trusted the original failure message, so I didn't just reread the code and move on. I ran the same kind of request again and watched the mechanism behave correctly in the logs. Then, separately, outside the agent entirely, I went and asked Atlassian directly — a plain, independent check against the ticket's real current status, the same way I'd caught the original problem — what state KAN-1 was actually in. It matched what the agent now reported. Two independent sources agreeing is the only kind of "verified" I've come to trust; one confident sentence, however well-formatted, isn't.
+
+Not the only time that night a correct answer got punished
+
+It wasn't the only bug in that same family. A few hours later, testing a different integration, the agent gave a completely correct answer — a list of real ticket URLs, copied accurately from a real API response — but wrote it out with literal backslash-n characters instead of actual line breaks, a small formatting slip rather than a factual one. A separate safety layer, whose entire job is catching the agent when it invents URLs that were never actually returned by a tool, choked on those stray characters, decided the URLs looked fabricated because they didn't cleanly match the clean ones it had seen earlier, and rejected a completely accurate answer three times in a row before the whole task gave up as "too many steps" — the exact same failure message, for the exact opposite reason: not because nothing had worked, but because a good answer kept getting told it wasn't good enough by a guard that couldn't see past a formatting artifact. Different mechanism, same shape of mistake: a system built to catch dishonesty occasionally punishes correctness that just looks a little unusual.
+
+What I keep coming back to
+
+Both of these are the kind of bug that never shows up if you only test the happy path once and call it verified. They only show up when you run the same real workflow enough times, against real accounts, with real friction, that the unlucky combination of "a genuine partial failure followed immediately by a genuine success" actually occurs. Apple spent a chunk of this year's WWDC arguing that local, tool-calling agents are where the Mac is going, and I think they're right about the category. But there's a difference between an agent that can call tools and an agent whose account of what happened when it called them can be trusted without a second check — and only one of those is actually hard to build. The tool-calling part is a Tuesday. The part where the agent is calibrated enough to know the difference between "I failed" and "I don't yet know that I succeeded" — that part takes finding bugs exactly like this one, at one in the morning, and being willing to open the real ticket yourself instead of taking the summary on faith.
+
+Six integrations, real accounts, one very long night. This was the bug where the agent was more pessimistic than reality. I'd rather find that one myself than have a customer find it for me.
